@@ -180,20 +180,21 @@ test('no answer raises a PincastError with status null and kind later', async ()
   })
 })
 
-test('refuses a secret key in a web page, and takes a restricted key or none there', () => {
+test('refuses every key in a web page, and runs there with no key', () => {
   globalThis.window = {}
   globalThis.document = {}
   try {
     assert.throws(() => new Pincast({ key: SECRET }), { name: 'PincastError', code: 'browser_not_allowed', kind: 'key' })
     assert.throws(() => new Pincast({ key: OLDER }), { code: 'browser_not_allowed' }, 'an older key works as a secret key')
     assert.throws(() => new Pincast({ key: 'not-a-pincast-key' }), { code: 'browser_not_allowed' })
-    assert.equal(new Pincast({ key: KEY }).keyInfo.kind, 'restricted')
+    assert.throws(() => new Pincast({ key: KEY }), (e) => { assert.equal(e.code, 'browser_not_allowed'); assert.doesNotMatch(e.message, /secret/i); return true }, 'a restricted key is refused too')
     assert.equal(new Pincast({ key: null }).keyInfo, null)
   } finally {
     delete globalThis.window
     delete globalThis.document
   }
   assert.equal(new Pincast({ key: SECRET }).keyInfo.kind, 'secret', 'on a server a secret key is fine')
+  assert.equal(new Pincast({ key: KEY }).keyInfo.kind, 'restricted', 'on a server a restricted key is fine')
 })
 
 test('never shows the key: not in inspect, JSON or any error', async () => {

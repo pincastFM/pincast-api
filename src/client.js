@@ -56,11 +56,11 @@ export class Pincast {
   constructor(options = {}) {
     const key = options.key !== undefined ? options.key : globalThis.process?.env?.PINCAST_KEY
     if (key != null && typeof key !== 'string') throw new TypeError('key must be a string')
-    if (key && inBrowser() && keyInfo(key)?.kind !== 'restricted') {
+    if (key && inBrowser()) {
       throw new PincastError({
         code: 'browser_not_allowed',
         fix: 'Call Pincast from your server and keep the key there.',
-        message: 'A secret Pincast key cannot be used in a web page, where anyone who opens the page can read it. Call Pincast from your server and keep the key there.',
+        message: 'No key can be used in a web page, where anyone who opens the page can read it. Call Pincast from your server and keep the key there.',
       })
     }
     this.#key = key || null

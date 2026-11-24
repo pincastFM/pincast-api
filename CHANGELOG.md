@@ -13,7 +13,7 @@ The first release, built from the Placecard registry's API file, version 1.0.0.
 - An `Idempotency-Key` on each of the three writes, kept across the client's own retries.
 - Waits on `Retry-After` for `rate_limited`, `quota_exceeded` and `signin_check_unavailable`, up to 60 seconds at a time unless you set `maxRetryWait`.
 - `PincastError`, which carries the status, code, field, fix and kind of each refusal.
-- A refusal to run in a web page with a secret key.
+- A refusal to run in a web page with any key.
 - Test person helpers: `testPerson`, `testActor`, `isTestPerson`, `isTestKey` and `keyInfo`.
 - `@pincast/api/resend-queue`, an optional queue that keeps each collect until Placecard has it.
 - `@pincast/api/mock`, a local registry built from the API file, for your own tests.

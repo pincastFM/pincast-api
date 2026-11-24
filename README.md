@@ -52,7 +52,7 @@ Each method takes a last `options` argument: `signal` and `timeoutMs`, and `idem
 
 The client sends your key in the `X-Pincast-Key` header, and only on the calls that take one. It never puts the key in an address, an error or a log line. `pincast.keyInfo` tells you the app, the kind and whether it is a test key, without the key itself.
 
-In a web page, the client refuses a secret key and throws a `browser_not_allowed` error, because anyone who opens the page could read the key. A key with no `sk_` or `rk_` mark counts as secret.
+In a web page, the client refuses every key, secret or restricted, and throws a `browser_not_allowed` error, because anyone who opens the page could read the key. With no key, it still runs there for the public list of apps, `getApps()`.
 
 ## Retries
 
