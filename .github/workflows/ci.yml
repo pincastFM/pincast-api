@@ -61,6 +61,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
+      # The script reads NYID's origin/main. The checkout above is NYID's main, so if it left no
+      # origin/main ref, point one at what it checked out.
       - if: env.HAS_NYID_TOKEN == 'true'
         working-directory: pincast-api
-        run: NO_FETCH=1 node scripts/sync-openapi.mjs --check
+        run: |
+          git -C ../NYID rev-parse -q --verify refs/remotes/origin/main > /dev/null || git -C ../NYID update-ref refs/remotes/origin/main HEAD
+          NO_FETCH=1 node scripts/sync-openapi.mjs --check
