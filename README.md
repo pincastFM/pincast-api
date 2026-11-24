@@ -126,6 +126,16 @@ await mock.close()
 
 The types come from the API file (`openapi/placecard-v1.openapi.json`, also at `@pincast/api/openapi.json`). `npm run generate` writes them again. `npm run check` fails when the API file has a call the client lacks.
 
+## Versions
+
+Every release follows one rule. [CHANGELOG.md](CHANGELOG.md) lists what each one changed.
+
+- **Patch** (0.1.0 to 0.1.1): a fix, or a change your code can't see. The API file is the same, or only its text and examples changed.
+- **Minor** (0.1.1 to 0.2.0): something new, and everything that worked still works. An operation added to the API file is a minor. So is a new optional field, error code, option or export.
+- **Major** (0.2.0 to 1.0.0, then 2.0.0): something that worked can stop working. An operation, field or export removed is a major. So is a narrowed field: one that's newly required, takes fewer values or a shorter length, or changed its type. So is raising the lowest Node version the package runs on.
+
+The rule holds below 1.0.0 too, so the first breaking change makes 1.0.0. While the version starts with 0, a range like `^0.1.0` takes patches only, so raise it to take a minor.
+
 ## License
 
 MIT

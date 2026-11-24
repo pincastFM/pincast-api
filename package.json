@@ -3,6 +3,14 @@
   "version": "0.1.0",
   "description": "Typed client for the Pincast card registry (Placecard v1): sets, cards, collects, claims and test apps.",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pincastFM/pincast-api.git"
+  },
+  "homepage": "https://github.com/pincastFM/pincast-api#readme",
+  "bugs": {
+    "url": "https://github.com/pincastFM/pincast-api/issues"
+  },
   "type": "module",
   "main": "./src/index.js",
   "types": "./src/index.d.ts",
@@ -26,6 +34,10 @@
     "src",
     "openapi"
   ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
   "engines": {
     "node": ">=20.12"
   },
@@ -33,7 +45,9 @@
     "generate": "node scripts/generate.mjs",
     "check": "node scripts/check-operations.mjs",
     "test": "node --test test/*.test.js",
-    "prepack": "node scripts/check-operations.mjs"
+    "prepack": "node scripts/check-operations.mjs",
+    "sync": "node scripts/sync-openapi.mjs",
+    "changelog": "node scripts/changelog.mjs"
   },
   "keywords": [
     "pincast",
