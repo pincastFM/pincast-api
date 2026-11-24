@@ -1,0 +1,45 @@
+{
+  "name": "@pincast/api",
+  "version": "0.1.0",
+  "description": "Typed client for the Pincast card registry (Placecard v1): sets, cards, collects, claims and test apps.",
+  "license": "MIT",
+  "type": "module",
+  "main": "./src/index.js",
+  "types": "./src/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "default": "./src/index.js"
+    },
+    "./resend-queue": {
+      "types": "./src/resend-queue.d.ts",
+      "default": "./src/resend-queue.js"
+    },
+    "./mock": {
+      "types": "./src/mock.d.ts",
+      "default": "./src/mock.js"
+    },
+    "./openapi.json": "./openapi/placecard-v1.openapi.json",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "src",
+    "openapi"
+  ],
+  "engines": {
+    "node": ">=20.12"
+  },
+  "scripts": {
+    "generate": "node scripts/generate.mjs",
+    "check": "node scripts/check-operations.mjs",
+    "test": "node --test test/*.test.js",
+    "prepack": "node scripts/check-operations.mjs"
+  },
+  "keywords": [
+    "pincast",
+    "placecard",
+    "cards",
+    "api",
+    "client"
+  ]
+}
